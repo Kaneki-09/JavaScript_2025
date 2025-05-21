@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>オブジェクトの応用</title>
+</head>
+
+<body>
+    <script>
+        const teacher = [
+            {
+                name: "高木",
+                age: 42,
+                blood: "B"
+            },
+            {
+                name: "田中",
+                age: 35,
+                blood: "AB"
+            }
+        ];
+
+        console.log(teacher[0].name);
+
+        /* 値を取り出す
+    --------------------*/
+        teacher.forEach((item) => {
+            for (const key in item) {
+                console.log(key, item[key]);
+            }
+        });
+
+        for (const [index, person] of teacher.entries()) {
+            console.log(index, person);
+
+            for (const [key, value] of Object.entries(person)) {
+                console.log(key, value);
+            }
+        }
+
+        const fruits = ['apple', 'banana', 'orange'];
+
+        for (const [index, fruit] of fruits.entries()) {
+            console.log(index, fruit);
+        }
+    </script>
+</body>
+
+</html>
