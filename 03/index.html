@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>オブジェクトの応用</title>
+</head>
+
+<body>
+    <script>
+        const point = {
+            x: 100,
+            y: 180,
+            z: 90,
+        }
+
+        for (const key in point) {
+            console.log(key);
+            console.log(point[key]);
+        }
+
+        console.log(Object.keys(point));
+        console.log(Object.values(point));
+        console.log(Object.entries(point));
+
+
+        Object.entries(point).forEach(([key, value]) => {
+            console.log(key, value);
+        });
+        console.log(point['y']);
+
+        const link = {
+            textContent: 'トライデント',
+            href: 'https://computer.trident.ac.jp',
+        };
+
+        const anchor = document.createElement('a');
+        anchor.textContent = link.textContent;
+        // anchor.href = link.href;
+        anchor.setAttribute('href', link.href);
+        document.body.append(anchor);
+
+
+        const otherProps = {
+            z: 90,
+            color: 'red',
+        }
+
+        const point3D = {
+            x: 100,
+            y: 180,
+            ...otherProps,
+        };
+
+        console.log(point3D);
+
+        const { x, color, ...others } = point3D;
+
+        console.log(x, color, others);
+    </script>
+</body>
+
+</html>
