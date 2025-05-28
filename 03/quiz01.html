@@ -5,6 +5,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>3択クイズ - 基本形</title>
+    <style>
+        .container {
+            margin: 60px auto;
+            padding: 50px;
+            text-align: center;
+            border: 1px solid #312f2f;
+            background-color: #c6d3e1;
+        }
+
+        .container div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        button {
+            width: 50%;
+            padding: 10px 0;
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 
 <body>
@@ -40,6 +69,69 @@
                 answer: 'a',
             },
         ];
+
+        const container = document.querySelector('.container');
+        container.innerHTML = '';
+
+        let currentQuiz = 0;
+        let score = 0;
+
+        const showResult = () => {
+            container.innerHTML = '';
+            const resultText = document.createElement('h2');
+            resultText.textContent = `あなたのスコアは ${score}/${quizData.length} です。`;
+            container.append(resultText);
+
+            const restartBtn = document.createElement('button');
+            restartBtn.textContent = '再挑戦';
+            restartBtn.addEventListener('click', () => {
+                currentQuiz = 0;
+                score = 0;
+                loadQuiz();
+            });
+            container.append(restartBtn);
+        };
+
+        const loadQuiz = () => {
+            container.textContent = '';
+
+            const question = document.createElement('h2');
+            const currentQuizData = quizData[currentQuiz];
+            question.textContent = currentQuizData.question;
+            container.append(question);
+
+            const wrapper = document.createElement('div');
+
+            console.log(Object.entries(currentQuizData.choices));
+            Object.entries(currentQuizData.choices).forEach(([key, value]) => {
+                const choiceBtn = document.createElement('button');
+                choiceBtn.setAttribute('value', key);
+                choiceBtn.textContent = value;
+                choiceBtn.setAttribute('name', 'answer');
+                wrapper.append(choiceBtn);
+                choiceBtn.addEventListener('click', () => {
+                    const userAnswer = currentQuizData.answer.trim();
+
+                    if (userAnswer === quizData[currentQuiz].answer) {
+                        score++;
+                        console.log(score);
+                    }
+
+                    choiceBtn.value = '';
+                    currentQuiz++;
+
+                    if (currentQuiz < quizData.length) {
+                        loadQuiz();
+                    } else {
+                        showResult();
+                    }
+                });
+                container.append(wrapper);
+
+            });
+        };
+
+        loadQuiz();
     </script>
 </body>
 
