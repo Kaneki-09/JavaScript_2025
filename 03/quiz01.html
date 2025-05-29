@@ -109,8 +109,8 @@
                 choiceBtn.textContent = value;
                 choiceBtn.setAttribute('name', 'answer');
                 wrapper.append(choiceBtn);
-                choiceBtn.addEventListener('click', () => {
-                    const userAnswer = currentQuizData.answer.trim();
+                choiceBtn.addEventListener('click', (e) => {
+                    const userAnswer = e.target.value;
 
                     if (userAnswer === quizData[currentQuiz].answer) {
                         score++;
