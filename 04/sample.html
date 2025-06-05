@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>その他の応用</title>
+</head>
+
+<body>
+    <script>
+        const str = "hello";
+        console.log(str.substring(2, 4));
+
+        const strArr = [...str];
+        console.log(strArr);
+
+        const joinArr = strArr.join('/');
+        console.log(joinArr);
+
+        const splitArr = joinArr.split('/');
+        console.log(splitArr);
+
+        const [first, , second, ...other] = joinArr.split('/');
+        console.log(first);
+        console.log(second);
+        console.log(other);
+
+        const name = "SUSHIL";
+        const nameArr = [...name];
+        const joinName = nameArr.join('✶');
+        console.log(joinName);
+
+        const str2 = "Webデザイン学科";
+
+        console.log(str2.slice(0, 3));
+        console.log(str2.replace('Web', 'グラフィック'));
+        console.log(str2.indexOf('Web'));
+        console.log(str2.indexOf('CG'));
+        console.log(str2.repeat(3));
+        console.log(str2.padStart(20, '!'));
+        console.log(str2.padEnd(20, '#'));
+
+        const scores = [10, 3, 9];
+        let sum = 0;
+
+        for (const score of scores) {
+            sum += score;
+        };
+
+        const avg = sum / scores.length;
+
+        console.log(`${sum}:${avg}`);
+
+        console.log(Math.floor(avg));
+        console.log(Math.ceil(avg));
+        console.log(Math.round(avg));
+        console.log(avg.toFixed(3));
+
+        /* 1. 1〜10までの数字が入った配列を作る。 */
+        const scores2 = [];
+
+        for (let i = 1; i <= 10; i++) {
+            scores2.push(i);
+        }
+        console.log(scores2);
+
+        /* 2. 配列に入れた数字を全部足す。 */
+        let sum2 = 0;
+        for (const score2 of scores2) {
+            sum2 += score2;
+        }
+        console.log(sum2);
+
+
+        /* 3.　それの平均値を出して、小数点第2位まで表示する。 */
+        const avg2 = sum2 / scores2.length;
+        console.log(avg2.toFixed(2));
+
+        /*　4. その値を2乗して、小数点で切り捨てる。 */
+        console.log(Math.floor(Math.pow(avg2, 2)));
+
+
+        /* Dateオブジェクトの取得
+        --------------------*/
+        const d = new Date();
+        console.log(d);
+
+        console.log(d.getMonth() + 1, d.getDate());
+        console.log(Date.now() / 1000 / 60 / 60);
+
+        let nowTime;
+        let previousTime = Date.now();
+
+        window.addEventListener('click', () => {
+            nowTime = Date.now();
+            console.log(((nowTime - previousTime) / 1000).toFixed(2));
+            previousTime = nowTime;
+        });
+    </script>
+</body>
+
+</html>
