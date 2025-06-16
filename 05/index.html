@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>非同期処理</title>
+</head>
+
+<body>
+    <div class="container"></div>
+    <script>
+        // XMLHttpRequest
+
+        // const container = document.querySelector('.container');
+
+        // const request = new XMLHttpRequest(); //XMLHttpRequestオブジェクトの生成
+        // request.open('GET', 'https://pokeapi.co/api/v2/pokemon/pikachu'); //通信の準備（メソッドおよびURLの設定）
+        // request.send(); //設定に基づき、リクエストを送信（非同期通信開始）
+
+        // console.log(`1st: ${request.responseText}`);
+
+        // request.addEventListener('load', function () {
+        //     const data = JSON.parse(request.responseText); //オブジェクトに変換
+        //     console.log(data);
+
+        //     const container = document.querySelector('.container'); //要素の取得
+        //     const img = document.createElement('img'); //img要素の生成
+        //     img.src = data.sprites.front_default; //src属性の設定
+        //     container.appendChild(img); //任意の親要素の子要素として追加
+        // });
+
+        // container.textContent = '読み込み中...🐣';
+
+
+        fetch('https://pokeapi.co/api/v2/pokemon/pikachu')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                container.textContent = '取得完了!';
+
+                showPokemon(data);
+            })
+            .catch(error => console.error(`Error: ${error}`))
+            .finally(() => console.log('Finished'));
+
+        const container = document.querySelector('.container');
+        container.textContent = '取得中...';
+
+        const showPokemon = (data) => {
+            console.log(data.name);
+
+            const name = document.createElement('h2');
+            name.textContent = data.name;
+            container.appendChild(name);
+
+            const img = document.createElement('img');
+            img.src = data.sprites.front_default;
+            container.appendChild(img);
+
+            const abilities = document.createElement('ul');
+            data.abilities.forEach((ability) => {
+                const li = document.createElement('li');
+                li.textContent = ability.ability.name;
+                abilities.appendChild(li);
+            });
+            container.appendChild(abilities);
+        };
+    </script>
+</body>
+
+</html>
